@@ -18,10 +18,7 @@
 
 
 	<import resource="classpath:/atem/soydata/entitytype-example.xml" />
-	<import resource="classpath:/meta/utility/transform-example.xml" />
 	<import resource="classpath:/atem/pojo/entitytype-example.xml" />
-	<import resource="classpath:/atem/pojo/entitytype-example.xml" />
-	<import resource="classpath:/atem/impl/memory-meta.xml" />
 	
 
 
@@ -40,27 +37,39 @@
 		</property>
 	</bean>
 	
-	<bean id="atem-soypojo-repository" parent="atem-pojo-repository">
-		<property name="includedPackage" value="org.atemsource.atem.impl.soydata"/>
+	<bean id="atem-soypojo-repository" parent="atem-scanned-pojo-repository">
+		<property name="includedPackage" value="org.atemsource.atem.impl.soydata.entities"/>
 	</bean>
 	
-	<bean class="org.atemsource.atem.utility.transform.impl.binding.BindingProcessor">
-		<property name="includedPackage" value="org.atemsource.atem.impl.soydata"/>
-		<property name="prefix" value="soy"/>
-		<property name="subRepository" ref="atem-soydata-repository"/>
-		<property name="transformationBuilderFactory" ref="meta-utility-transformationBuilderFactory"/>
+	
+		<bean class="org.atemsource.atem.utility.path.AttributePathBuilderFactory">
+	</bean>
+
+
+	<bean id="atem-utility-binder" class="org.atemsource.atem.utility.binding.Binder">
+		<property name="typeFilter">
+			<bean class="org.atemsource.atem.utility.binding.PackageTypeFilter">
+				<property name="includedPackage" value="org.atemsource.atem.impl.soydata.entities" />
+			</bean>
+		</property>
+		<property name="subRepository" ref="atem-soydata-repository" />
+		<property name="transformationBuilderFactory">
+			<bean
+				class="org.atemsource.atem.utility.transform.api.TransformationBuilderFactory">
+				<property name="converterFactory">
+					<bean
+						class="org.atemsource.atem.utility.transform.impl.converter.ConverterFactoryImpl" />
+				</property>
+			</bean>
+		</property>
+		<property name="typeNameConverter">
+			<bean class="org.atemsource.atem.utility.binding.PrefixTypeNameConverter">
+				<property name="prefix" value="soy" />
+			</bean>
+		</property>
 	</bean>
 	
-	<bean id="derivation-repository" parent="atem-pojo-repository">
-		<property name="includedPackage" value="org.atemsource.atem.utility.transform.api" />
-	</bean>
-	<bean
-		class="org.atemsource.atem.utility.transform.impl.DerivationMetaAttributeRegistrar">
-		<property name="metaAttributeService" ref="atem-dynamic-MetaAttributeService" />
-	</bean>
-	<bean
-		class="org.atemsource.atem.utility.transform.impl.BindingMetaAttributeRegistrar">
-		<property name="metaAttributeService" ref="atem-dynamic-MetaAttributeService" />
-	</bean>	
+
+
 
 </beans>

@@ -1,4 +1,4 @@
-package org.atemsource.atem.impl.soydata;
+package org.atemsource.atem.impl.soydata.entities;
 
 public class EntityB
 {

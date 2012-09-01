@@ -10,10 +10,13 @@ import org.atemsource.atem.api.EntityTypeRepository;
 import org.atemsource.atem.api.type.EntityType;
 import org.atemsource.atem.impl.soydata.entities.EntityA;
 import org.atemsource.atem.impl.soydata.entities.EntityB;
+import org.atemsource.atem.utility.binding.Binder;
 import org.atemsource.atem.utility.transform.api.DerivedType;
 import org.atemsource.atem.utility.transform.api.SimpleTransformationContext;
+import org.atemsource.atem.utility.transform.api.Transformation;
 import org.atemsource.atem.utility.transform.api.UniTransformation;
 import org.atemsource.atem.utility.transform.impl.DerivationMetaAttributeRegistrar;
+import org.atemsource.atem.utility.transform.impl.EntityTypeTransformation;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -27,20 +30,21 @@ public class SoyBindingProcessorTest
 
 	@Inject
 	private EntityTypeRepository entityTypeRepository;
+	
+	@Inject
+	private Binder binder;
 
 	@Test
 	public void test()
 	{
 		EntityType<SoyMapData> soyType = entityTypeRepository.getEntityType("soy:" + EntityA.class.getName());
-		DerivedType derivedType =
-			(DerivedType) entityTypeRepository.getEntityType(EntityType.class)
-				.getMetaAttribute(DerivationMetaAttributeRegistrar.DERIVED_FROM).getValue(soyType);
+		
 		EntityA a = new EntityA();
 		a.setB(new EntityB());
 		a.getB().setInteger(100);
-		UniTransformation<Object, SoyMapData> transformation =
-			(UniTransformation<Object, SoyMapData>) derivedType.getTransformation().getAB();
-		SoyMapData soy = transformation.convert(a, new SimpleTransformationContext());
+			EntityTypeTransformation<EntityA, SoyMapData> transformation =
+				binder.getTransformation(EntityA.class);
+		SoyMapData soy = transformation.getAB().convert(a, new SimpleTransformationContext());
 		Assert.assertEquals(100, soy.getMapData("b").getInteger("integer"));
 
 	}

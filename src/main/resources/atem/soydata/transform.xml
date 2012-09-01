@@ -17,18 +17,54 @@
 
 
 
-	<import resource="classpath:/atem/soydata/transform.xml" />
+	<import resource="classpath:/atem/soydata/entitytype-example.xml" />
+	<import resource="classpath:/atem/pojo/entitytype-example.xml" />
+	
 
 
-	<bean id="atem-soypojo-repository" parent="abstract-atem-soypojo-repository">
+	<bean id="atem-repository"
+		class="org.atemsource.atem.impl.common.EntityTypeRepositoryImpl"
+		init-method="init">
+		<property name="repositories">
+			<list>
+				<ref bean="atem-entityType-repository" />
+				<ref bean="atem-attribute-repository" />
+				<ref bean="atem-soypojo-repository" />
+				<ref bean="atem-soydata-repository" />
+				<ref bean="atem-dynamicEntity-repository" />
+				<ref bean="derivation-repository" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean abstract="true" id="abstract-atem-soypojo-repository" parent="atem-scanned-pojo-repository">
 		<property name="includedPackage" value="org.atemsource.atem.impl.soydata.entities"/>
 	</bean>
 	
 	
-	<bean id="atem-utility-binder" parent="abstract-atem-utility-binder">
+		<bean class="org.atemsource.atem.utility.path.AttributePathBuilderFactory">
+	</bean>
+
+
+	<bean abstract="true" id="abstract-atem-utility-binder" class="org.atemsource.atem.utility.binding.Binder">
 		<property name="typeFilter">
 			<bean class="org.atemsource.atem.utility.binding.PackageTypeFilter">
 				<property name="includedPackage" value="org.atemsource.atem.impl.soydata.entities" />
+			</bean>
+		</property>
+		<property name="subRepository" ref="atem-soydata-repository" />
+		<property name="transformationBuilderFactory">
+			<bean
+				class="org.atemsource.atem.utility.transform.api.TransformationBuilderFactory">
+				<property name="converterFactory">
+					<bean
+						class="org.atemsource.atem.utility.transform.impl.converter.ConverterFactoryImpl" />
+				</property>
+			</bean>
+		</property>
+		<property name="typeNameConverter">
+			<bean class="org.atemsource.atem.utility.binding.PrefixTypeNameConverter">
+				<property name="prefix" value="soy" />
 			</bean>
 		</property>
 	</bean>

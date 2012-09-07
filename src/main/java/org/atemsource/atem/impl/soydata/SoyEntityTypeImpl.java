@@ -13,6 +13,7 @@ import org.atemsource.atem.api.BeanLocator;
 import org.atemsource.atem.api.EntityTypeRepository;
 import org.atemsource.atem.api.infrastructure.exception.TechnicalException;
 import org.atemsource.atem.impl.common.AbstractEntityType;
+import org.atemsource.atem.impl.common.DynamicEntityType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -20,7 +21,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Scope("prototype")
-public class SoyEntityTypeImpl extends AbstractEntityType<SoyMapData>
+public class SoyEntityTypeImpl extends DynamicEntityType<SoyMapData>
 {
 
 	@Autowired

@@ -31,7 +31,6 @@
 				<ref bean="atem-attribute-repository" />
 				<ref bean="atem-soypojo-repository" />
 				<ref bean="atem-soydata-repository" />
-				<ref bean="atem-dynamicEntity-repository" />
 				<ref bean="derivation-repository" />
 			</list>
 		</property>

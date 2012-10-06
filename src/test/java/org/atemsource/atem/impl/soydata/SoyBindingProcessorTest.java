@@ -1,7 +1,5 @@
 package org.atemsource.atem.impl.soydata;
 
-import com.google.template.soy.data.SoyMapData;
-
 import javax.inject.Inject;
 
 import junit.framework.Assert;
@@ -11,16 +9,14 @@ import org.atemsource.atem.api.type.EntityType;
 import org.atemsource.atem.impl.soydata.entities.EntityA;
 import org.atemsource.atem.impl.soydata.entities.EntityB;
 import org.atemsource.atem.utility.binding.Binder;
-import org.atemsource.atem.utility.transform.api.DerivedType;
 import org.atemsource.atem.utility.transform.api.SimpleTransformationContext;
-import org.atemsource.atem.utility.transform.api.Transformation;
-import org.atemsource.atem.utility.transform.api.UniTransformation;
-import org.atemsource.atem.utility.transform.impl.DerivationMetaAttributeRegistrar;
 import org.atemsource.atem.utility.transform.impl.EntityTypeTransformation;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import com.google.template.soy.data.SoyMapData;
 
 
 @ContextConfiguration(locations = {"classpath:/test/atem/soydata/transform.xml"})

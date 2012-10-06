@@ -44,7 +44,7 @@ public class SoyBindingProcessorTest
 		a.getB().setInteger(100);
 			EntityTypeTransformation<EntityA, SoyMapData> transformation =
 				binder.getTransformation(EntityA.class);
-		SoyMapData soy = transformation.getAB().convert(a, new SimpleTransformationContext());
+		SoyMapData soy = transformation.getAB().convert(a, new SimpleTransformationContext(entityTypeRepository));
 		Assert.assertEquals(100, soy.getMapData("b").getInteger("integer"));
 
 	}

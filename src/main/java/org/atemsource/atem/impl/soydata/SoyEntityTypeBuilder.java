@@ -36,9 +36,11 @@ import org.springframework.stereotype.Component;
 public class SoyEntityTypeBuilder extends AbstractEntityTypeBuilder
 {
 
+	
+
 	@Override
 	public <K, V, SoyMapData> MapAttribute<K, V, SoyMapData> addMapAssociationAttribute(String name, Type<K> keyType,
-		Type<V> valueType)
+		Type<V> valueType ,boolean sorted,Type[] validTargetTypes)
 	{
 		MapNodeAttribute mapAttribute = beanLocator.getInstance(MapNodeAttribute.class);
 		mapAttribute.setCode(name);
@@ -50,7 +52,7 @@ public class SoyEntityTypeBuilder extends AbstractEntityTypeBuilder
 	}
 
 	@Override
-	public CollectionAttribute addMultiAssociationAttribute(String code, Type targetType,
+	public CollectionAttribute addMultiAssociationAttribute(String code, Type targetType,Type[] validTargetTypes,
 		CollectionSortType collectionSortType)
 	{
 		SoyListDataAttribute attribute = beanLocator.getInstance(SoyListDataAttribute.class);
@@ -113,7 +115,7 @@ public class SoyEntityTypeBuilder extends AbstractEntityTypeBuilder
 	}
 
 	@Override
-	public <J> SingleAttribute<J> addSingleAttribute(String code, Type<J> type)
+	public <J> SingleAttribute<J> addSingleAttribute(String code,Type<J> type, Type[] validTargetTypes)
 	{
 		if (type == null || type instanceof EntityType<?>)
 		{

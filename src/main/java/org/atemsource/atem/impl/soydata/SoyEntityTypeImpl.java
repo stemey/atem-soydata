@@ -67,4 +67,11 @@ public class SoyEntityTypeImpl extends DynamicEntityType<SoyMapData>
 	{
 		return true;
 	}
+
+	
+
+	public boolean isInstance(Object entity) {
+		// TODO  we should check the type
+		return false;//entity instanceof SoyMapData;
+	}
 }

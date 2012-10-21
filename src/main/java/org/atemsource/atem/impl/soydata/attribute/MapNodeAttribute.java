@@ -16,4 +16,8 @@ import org.springframework.stereotype.Component;
 public class MapNodeAttribute<V> extends AbstractMapNodeAttribute<V>
 {
 
+	public boolean isSorted() {
+		return false;
+	}
+
 }

@@ -3,8 +3,8 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.atemsource</groupId>
 	<artifactId>atem-soy</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	
+	<version>0.0.1</version>
+
 	<name>Atem implementations for soydata.</name>
 	<description>Provides transformation and binding from atem types to soydata </description>
 	<url>https://github.com/stemey/atem-soydata</url>
@@ -29,6 +29,10 @@
 			<name>Sonatype Nexus Snapshots</name>
 			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
 		</snapshotRepository>
+		<site>
+			<id>ftp-atemsource</id>
+			<url>ftp://ftp.atemsource.org:21/maven/soydata/site</url>
+		</site>
 	</distributionManagement>
 	<licenses>
 		<license>
@@ -38,7 +42,7 @@
 			<comments>A business-friendly OSS license</comments>
 		</license>
 	</licenses>
-	
+
 	<build>
 		<extensions>
 			<!-- Enabling the use of FTP -->
@@ -140,9 +144,10 @@
 					</reportPlugins>
 				</configuration>
 			</plugin>
+
 		</plugins>
-	</build>	
-	
+	</build>
+
 	<dependencies>
 		<dependency>
 			<groupId>com.googlecode</groupId>

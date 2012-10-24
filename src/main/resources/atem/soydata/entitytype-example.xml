@@ -17,11 +17,9 @@
 
 
 
-	<!-- Scans for application @Components to deploy -->
-
 	<import resource="entitytype.xml" />
 
-	<bean  id="atem-soydata-repository" class="org.atemsource.atem.impl.soydata.SoyEntityTypeRepository">
+	<bean  id="atem-soydata-repository" parent="abstract-atem-soydata-repository">
 	</bean>
 
 

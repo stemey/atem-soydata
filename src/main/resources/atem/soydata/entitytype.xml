@@ -23,36 +23,12 @@
            http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd
            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
 
-
-
-	<!-- Scans for application @Components to deploy -->
-
 	<import resource="classpath:/atem/impl/common.xml" />
-	<import resource="classpath:/atem/pojo/entitytype-example.xml" />
-	<import resource="classpath:/meta/utility/transform.xml"/>
-	<import resource="classpath:/atem/impl/memory-meta.xml"/>
-	
 		
-	<bean id="derivation-repository" parent="atem-pojo-repository">
-		<property name="includedPackage" value="org.atemsource.atem.utility.transform.api" />
+	<bean abstract="true" id="abstract-atem-soydata-repository" class="org.atemsource.atem.impl.soydata.SoyEntityTypeRepository">
 	</bean>
-	<bean
-		class="org.atemsource.atem.utility.transform.impl.DerivationMetaAttributeRegistrar">
-		<property name="metaAttributeService" ref="atem-memory-metaAttributeService" />
-	</bean>
-	<bean
-		class="org.atemsource.atem.utility.transform.impl.BindingMetaAttributeRegistrar">
-		<property name="metaAttributeService" ref="atem-memory-metaAttributeService" />
-	</bean>	
-
-
-	<context:component-scan base-package="org.atemsource.atem.utility.binding">
-	</context:component-scan>
 	
 	<context:component-scan base-package="org.atemsource.atem.impl.soydata">
 	</context:component-scan>
-	
-
-
 
 </beans>

@@ -28,7 +28,6 @@
 				<ref bean="atem-entityType-repository" />
 				<ref bean="atem-attribute-repository" />
 				<ref bean="atem-soydata-repository" />
-				<ref bean="derivation-repository" />
 			</list>
 		</property>
 	</bean>

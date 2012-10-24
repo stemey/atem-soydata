@@ -18,22 +18,31 @@
 
 
 	<import resource="classpath:/atem/soydata/transform.xml" />
+	<import resource="classpath:/atem/soydata/entitytype-example.xml" />
 
 
-	<bean id="atem-soypojo-repository" parent="abstract-atem-soypojo-repository">
+	<bean id="atem-soypojo-repository" parent="abstract-atem-scanned-pojo-repository">
 		<property name="includedPackage" value="org.atemsource.atem.impl.soydata.entities"/>
 	</bean>
 	
 	
 	<bean id="atem-utility-binder" parent="abstract-atem-utility-binder">
-		<property name="typeFilter">
-			<bean class="org.atemsource.atem.utility.binding.PackageTypeFilter">
-				<property name="includedPackage" value="org.atemsource.atem.impl.soydata.entities" />
-			</bean>
-		</property>
+		<property name="typeFilter" ref="atem-soypojo-repository"/>
 	</bean>
 	
 
-
+	<bean id="atem-repository"
+		class="org.atemsource.atem.impl.common.EntityTypeRepositoryImpl"
+		init-method="init">
+		<property name="repositories">
+			<list>
+				<ref bean="atem-entityType-repository" />
+				<ref bean="atem-attribute-repository" />
+				<ref bean="atem-soydata-repository" />
+				<ref bean="atem-soypojo-repository" />
+				<ref bean="atem-transformation-subrepository"/>
+			</list>
+		</property>
+	</bean>
 
 </beans>

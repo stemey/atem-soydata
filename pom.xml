@@ -147,7 +147,6 @@
 
 		</plugins>
 	</build>
-
 	<repositories>
 		<repository>
 			<id>sonatype-nexus-snapshots</id>
